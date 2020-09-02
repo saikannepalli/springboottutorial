@@ -37,7 +37,7 @@ pipeline{
          sh "gcloud config set compute/region us-central1"// confiuring the project compute-region
          sh "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project mssdevops-284216"// command to connect the GKE cluster through command line
 
-         sh "sed -i -e 's,image_to_be_deployed,'maniengg/springboot1.2:${BUILD_ID}',g' springboot.yml"
+         sh "sed -i -e 's,image_to_be_deployed,'saikannepalli/springboottutorial:${BUILD_ID}',g' springboot.yml"
          sh "kubectl apply -f springboot.yml"
     }
 }
