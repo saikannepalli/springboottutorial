@@ -25,23 +25,6 @@ pipeline{
 	              }
            }
        }    
-     stage("Deploy To Kuberates Cluster"){
-      steps{
-//Created Service Account in GCP console and generated key is added it to the Jenkins Credentials.
-        withCredentials([file(credentialsId: 'demo-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-//activate the service account
-         sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
-//Configuring the project details to Jenkins and communicate with the gke cluster
-         sh "gcloud config set project mssdevops-284216" //configuring name of the project
-         sh "gcloud config set compute/zone us-central1-c"// confiuring the project compute-zone
-         sh "gcloud config set compute/region us-central1"// confiuring the project compute-region
-         sh "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project mssdevops-284216"// command to connect the GKE cluster through command line
-
-         sh "sed -i -e 's,image_to_be_deployed,'saikannepalli/springboottutorial:${BUILD_ID}',g' springboot.yml"
-         sh "kubectl apply -f springboot.yml"
-    }
-}
-
-     }
+    
      }
 }
