@@ -19,8 +19,8 @@ pipeline{
      stage('Push Docker Image'){
 	steps{
 //Docker Hub Credentials
-        withCredentials([string(credentialsId: 'sai-dockerpwd', variable: 'sai-dockerpwd')]) {
-          sh "sudo docker login -u saikannepalli -p ${sai-dockerpwd}"
+withCredentials([string(credentialsId: 'sai-dockerpwd', variable: 'sample')]) {
+          sh "sudo docker login -u saikannepalli -p ${sample}"
           sh "sudo docker push saikannepalli/springboottutorial:${BUILD_ID}"
 	              }
            }
